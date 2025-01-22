@@ -4,65 +4,64 @@ import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { TablerIconsModule } from 'angular-tabler-icons';
 
 export interface performanceData {
   id: number;
   imagePath: string;
   pname: string;
-  category: string;
-  progress: number;
-  sales: number;
+  Ubicacion: string;
+  debt: number;
+  
   status: string;
   }
   const PROJECT_DATA: performanceData[] = [
-  {
-  id: 1,
-  imagePath: 'assets/images/products/s6.jpg',
-  pname: 'Gaming Console',
-  category: 'Electronics',
-  progress: 78.5,
-  sales: 3.9,
-  status: 'low',
-  },
-  {
-  id: 2,
-  imagePath: 'assets/images/products/s9.jpg',
-  pname: 'Leather Purse',
-  category: 'Fashion',
-  progress: 58.6,
-  sales: 3.5,
-  status: 'medium',
-  },
-  {
-  id: 3,
-  imagePath: 'assets/images/products/s7.jpg',
-  pname: 'Red Velvate Dress',
-  category: 'Womens Fashion',
-  progress: 25,
-  sales: 3.8,
-  status: 'high',
-  },
-  {
-  id: 4,
-  imagePath: 'assets/images/products/s4.jpg',
-  pname: 'Headphone Boat',
-  category: 'Electronics',
-  progress: 96.3,
-  sales: 3.54,
-  status: 'critical',
-  },
+    {
+      id: 1,
+      imagePath: 'assets/images/products/s6.jpg',
+      pname: 'Café de Antioquia',
+      Ubicacion: 'Medellin',
+      debt: 1234.56,
+      status: 'A',
+    },
+    {
+      id: 2,
+      imagePath: 'assets/images/products/s9.jpg',
+      pname: 'Café del Huila',
+      Ubicacion: 'Huila',
+      debt: 1234.56,
+      status: 'I',
+    },
+    {
+      id: 3,
+      imagePath: 'assets/images/products/s7.jpg',
+      pname: 'Café de Nariño',
+      Ubicacion: 'Nariño',
+      debt: 1234.56,
+      status: 'A',
+    },
+    {
+      id: 4,
+      imagePath: 'assets/images/products/s4.jpg',
+      pname: 'Café del Cauca',
+      Ubicacion: 'Cauca',
+      debt: 1234.56,
+      status: 'I',
+    },
   ];
 
 @Component({
   selector: 'app-providers',
   standalone: true,
-  imports: [MaterialModule, MatTableModule, CommonModule, MatCardModule, MatDividerModule,],
+  imports: [MaterialModule, MatTableModule, CommonModule, MatCardModule, MatDividerModule, MatMenuModule, MatIconModule, TablerIconsModule,],
   templateUrl: './providers.component.html',
   
 })
 export class ProvidersComponent {
-
-  displayedColumns2: string[] = ['product', 'progress', 'status', 'sales'];
+  constructor() {}
+  displayedColumns2: string[] = ['Proveedor', 'debt', 'status', 'Acciones'];
 dataSource2 = PROJECT_DATA;
 
 
