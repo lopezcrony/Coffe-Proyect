@@ -1,9 +1,102 @@
-<!-- ============================================================== -->
-<!-- Simple four boxes Row -->
-<!-- ============================================================== -->
 <mat-card class="cardWithShadow">
-    <mat-card-content>
-      <mat-card-title>Sample Page</mat-card-title>
-      <mat-card-subtitle class="mat-body-1">This is test page</mat-card-subtitle>
-    </mat-card-content>
-  </mat-card>
+  <mat-card-header class="bg-light p-7 pb-7 mb-3 shadow-sm rounded">
+    <mat-card-title>
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <!-- Título del Header -->
+        <div class="d-flex align-items-center">
+          <mat-icon class="text-primary me-2">inventory_2</mat-icon>
+          <span class="text-primary fw-bold f-s-18">Gestión de Proveedores</span>
+        </div>
+        <!-- Botón de acción -->
+        <button mat-raised-button color="primary" class="rounded-pill d-flex align-items-center px-3 pb-7">
+          <mat-icon class="me-2">add</mat-icon>
+          <span class="ms-2">Agregar</span>
+        </button>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="table-responsive ">
+      <table mat-table [dataSource]="dataSource2" class="w-100 pt-3">
+        <!-- Supplier Column -->
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14 p-l-0">
+            Proveedor
+          </th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            <div class="d-flex align-items-center">
+              <img [src]="element.imagePath" alt="logo proveedor" width="48" class="rounded-circle border" />
+              <div class="m-l-16">
+                <h6 class="f-s-14 f-w-600 mb-1">
+                  {{ element.pname }}
+                </h6>
+                <span class="f-s-12 text-muted">
+                  {{ element.category }}
+                </span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Cumplimiento
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-progress-bar
+              [color]="element.progress >= 70 ? 'primary' : element.progress >= 40 ? 'accent' : 'warn'"
+              mode="determinate"
+              [value]="element.progress"
+              class="w-75">
+            </mat-progress-bar>
+            <span class="f-s-12 ml-2">{{ element.progress }}%</span>
+          </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Estado
+          </th>
+          <td mat-cell *matCellDef="let element">
+            @if(element.status == 'low') {
+              <span class="bg-light-success text-success rounded-pill px-3 py-1 f-s-12">
+                Activo
+              </span>
+            } @if(element.status == 'medium') {
+              <span class="bg-light-warning text-warning rounded-pill px-3 py-1 f-s-12">
+                En Revisión
+              </span>
+            } @if(element.status == 'high') {
+              <span class="bg-light-primary text-primary rounded-pill px-3 py-1 f-s-12">
+                Preferente
+              </span>
+            } @if(element.status == 'critical') {
+              <span class="bg-light-error text-error rounded-pill px-3 py-1 f-s-12">
+                Inactivo
+              </span>
+            }
+          </td>
+        </ng-container>
+
+        <!-- Sales Column -->
+        <ng-container matColumnDef="sales">
+          <th mat-header-cell *matHeaderCellDef class="f-w-600 f-s-14">
+            Ventas
+          </th>
+          <td mat-cell *matCellDef="let element" class="f-s-14">
+            {{ element.sales }}k
+            <button mat-icon-button color="primary" class="ml-2" matTooltip="Agregar Marca">
+              <mat-icon>add_business</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2" class="hover:bg-light-primary cursor-pointer"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>
