@@ -1,2 +1,2 @@
-# Modernize-Angular-pro
-Modernize Angular Admin Dashboard
+# Encafeinados-Angular-pro
+Encafeinados Angular Admin Dashboard
