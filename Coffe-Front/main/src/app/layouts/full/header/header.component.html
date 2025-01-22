@@ -1,0 +1,82 @@
+<mat-toolbar class="topbar">
+  <!-- Mobile Menu -->
+  <button
+    mat-icon-button
+    (click)="toggleMobileNav.emit()"
+    class="d-flex d-md-none justify-content-center"
+  >
+    <i-tabler name="menu-2" class="icon-15 d-flex"></i-tabler>
+  </button>
+
+  <!-- Espaciador flexible para empujar el contenido al extremo derecho -->
+  <span class="flex-1-auto"></span>
+
+  <!-- Contenedor para notificaciones e icono de perfil -->
+  <div class="d-flex align-items-center">
+    <!-- Notificaciones -->
+    <button
+      mat-icon-button
+      aria-label="Notifications"
+      [matMenuTriggerFor]="notificationMenu"
+      matBadge="1"
+      matBadgeColor="primary"
+      matTooltip="Notificaciones"
+    >
+      <i-tabler class="d-flex" name="bell"></i-tabler>
+    </button>
+
+    <!-- Menú desplegable para notificaciones -->
+    <mat-menu #notificationMenu="matMenu" xPosition="before" yPosition="below">
+      <button mat-menu-item>Notificación 1</button>
+      <button mat-menu-item>Notificación 2</button>
+      <button mat-menu-item>Notificación 3</button>
+    </mat-menu>
+
+    <!-- Icono de perfil -->
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="profilemenu"
+      aria-label="Profile Options"
+      matTooltip="Opciones"
+      matTooltipPosition="below"
+      class="ms-2"
+    >
+      <img
+        src="/assets/images/profile/user-1.jpg"
+        class="rounded-circle object-cover"
+        width="40"
+        alt="User Profile"
+      />
+    </button>
+    <mat-menu #profilemenu="matMenu" class="cardWithShadow">
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center"
+          ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
+        >My Profile
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center"
+          ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
+        >My Account
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="d-flex align-items-center"
+          ><i-tabler
+            name="list-check"
+            class="icon-18 d-flex"
+          ></i-tabler></mat-icon
+        >My Task
+      </button>
+
+      <div class="p-x-12 m-t-12">
+        <a
+          [routerLink]="['/authentication/login']"
+          mat-stroked-button
+          color="primary"
+          class="w-100"
+          >Logout</a
+        >
+      </div>
+    </mat-menu>
+  </div>
+</mat-toolbar>
