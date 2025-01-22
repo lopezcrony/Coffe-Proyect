@@ -1,0 +1,17 @@
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .mat-card {
+    margin-bottom: 16px;
+  }
+  
+  .mat-divider {
+    margin: 16px 0;
+  }
+  
+  .mt-4 {
+    margin-top: 16px;
+  }
+  
