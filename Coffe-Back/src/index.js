@@ -54,6 +54,7 @@ class Server{
     };
 
     routes(){
+        this.app.use('/proveedores', require('./routers/providers.routes'));
        
     }
 

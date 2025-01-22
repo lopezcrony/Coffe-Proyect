@@ -16,7 +16,7 @@ const Proveedor = sequelize.define('Proveedor', {
     },
     nombreProveedor: {
       type: DataTypes.STRING(50),
-      unique: false,
+      unique: true,
       allowNull: false,
       validate: {
         is: /^[a-zA-Záéíóúñ ]+$/
