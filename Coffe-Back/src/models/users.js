@@ -1,9 +1,10 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/dataBase");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-const User = sequelize.define(
-  "User",
+const Usuario = sequelize.define(
+  "Usuario",
   {
     idUsuario: {
       type: DataTypes.INTEGER,
@@ -72,12 +73,22 @@ const User = sequelize.define(
   }
 );
 
-User.prototype.validPassword = async function (password) {
+// Método para validar la contraseña
+Usuario.prototype.validPassword = async function (password) {
   return await bcrypt.compare(password, this.claveUsuario);
 };
 
-User.associate = (models) => {
-  User.belongsTo(models.Role, { foreignKey: "idRol" });
+// Método para generar JWT
+Usuario.prototype.generarJWT = function () {
+  return jwt.sign({ idUsuario: this.idUsuario, idRol: this.idRol }, process.env.JWT_SECRET, {
+    expiresIn: '1d',
+  });
 };
 
-module.exports = User;
+Usuario.associate = (models) => {
+  Usuario.belongsTo(models.Roles, { foreignKey: 'idRol', as: 'rol' });
+};
+
+module.exports = Usuario
+
+
