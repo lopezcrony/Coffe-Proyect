@@ -59,7 +59,8 @@ class Server{
         this.app.use('/roles', require('./routers/roles.routes'));
         this.app.use('/usuarios', require('./routers/users.routes'));
         this.app.use('/login', require('./routers/auth.routes'));
-       
+        this.app.use('/marca', require('./routers/brand.routes'));
+
     }
 
     Initiate(){
