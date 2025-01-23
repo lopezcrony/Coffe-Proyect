@@ -22,6 +22,10 @@ const Marca = sequelize.define('Marca', {
         is: /^[0-9a-zA-Záéíóúñ ]+$/
       }
     },
+    imagenURL: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
     estadoMarca: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
