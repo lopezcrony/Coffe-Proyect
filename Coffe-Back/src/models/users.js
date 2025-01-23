@@ -33,6 +33,7 @@ const Usuario = sequelize.define(
     },
     correoUsuario: {
       type: DataTypes.STRING,
+      unique:true,
       allowNull: false,
     },
     claveUsuario: {
