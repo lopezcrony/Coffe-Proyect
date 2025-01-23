@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
@@ -24,35 +24,38 @@ import { ProvidersService } from './providers-services.service';
  
   
 })
-export class ProvidersComponent implements OnInit{
-  providers: Proveedor[] = [];
+export class ProvidersComponent implements OnInit, AfterViewInit {
+  // Definir las columnas de la tabla
+  displayedColumns: string[] = ['nombreProveedor', 'numeroCuenta', 'estadoProveedor', 'Acciones'];
+  
+  // DataSource para la tabla de Material
+  dataSource = new MatTableDataSource<Proveedor>([]);
+  
+  // Referencia al paginador
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private providersService: ProvidersService) {
-    
-  }
+  constructor(private providersService: ProvidersService) {}
+
   ngOnInit(): void {
-    this.loadProviders();
-  }
-  OnInit(){
-    this.loadProviders();
+    this.loadProviders(); // Cargar los datos al inicializar el componente
   }
 
-  loadProviders() {
-    this.providersService.getAllProviders().subscribe(data => {
-      this.providers = data;
-    });
-  }
+  ngAfterViewInit(): void {
+    if (this.paginator) {
+      this.dataSource.paginator = this.paginator; // Configurar el paginador
+    }
+  }
 
-  displayedColumns2: string[] = ['Proveedor', 'debt', 'status', 'Acciones'];
-dataSource2 = new MatTableDataSource<Proveedor>(this.providers);
-
-@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator =
-Object.create(null);
-/**
-* Set the paginator after the view init since this component will
-* be able to query its view for the initialized paginator.
-*/
-ngAfterViewInit(): void {
-this.dataSource2.paginator = this.paginator;
-}
+  // Método para cargar los datos desde el servicio
+  loadProviders(): void {
+    this.providersService.getAllProviders().subscribe({
+      next: (data) => {
+        console.log('Datos cargados:', data); // Debug
+        this.dataSource.data = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar los datos:', err);
+      },
+    });
+  }
 }
