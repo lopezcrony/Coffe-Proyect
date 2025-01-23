@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Product } from './product.models';
+import { Brand } from './brand.models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService {
-  private apiUrl = 'http://localhost:3500/products';
+export class BrandService {
+  private apiUrl = 'http://localhost:3500/marca';
 
   constructor(private http: HttpClient) {}
 
-  getAllProviders(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl).pipe(
+  getAllProviders(): Observable<Brand[]> {
+    return this.http.get<Brand[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
-  createProvider(Product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, Product, { headers: this.getHeaders() }).pipe(
+  createProvider(Brand: Brand): Observable<Brand> {
+    return this.http.post<Brand>(this.apiUrl, Brand, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateProvider(Product: Product): Observable<Product> {
-    return this.http.put<Product>(
-      `${this.apiUrl}/${Product.idProducto}`,
-      Product,
+  updateProvider(Brand: Brand): Observable<Brand> {
+    return this.http.put<Brand>(
+      `${this.apiUrl}/${Brand.idMarca}`,
+      Brand,
       { headers: this.getHeaders() }
     ).pipe(catchError(this.handleError));
   }
 
-  updateStatusProvider(id: number, status: boolean): Observable<Product> {
-    return this.http.patch<Product>(
+  updateStatusProvider(id: number, status: boolean): Observable<Brand> {
+    return this.http.patch<Brand>(
       `${this.apiUrl}/${id}`,
-      { estadoProduct: status },
+      { estadoBrand: status },
       { headers: this.getHeaders() }
     ).pipe(catchError(this.handleError));
   }

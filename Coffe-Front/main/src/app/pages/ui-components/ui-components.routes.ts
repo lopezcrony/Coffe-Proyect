@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 // ui
 import { ProvidersComponent } from './providers/providers.component';
-import { ProductComponent } from './product/product.component';
+import { BrandComponent } from './brand/brand.component';
 import { AppBadgeComponent } from './badge/badge.component';
 import { AppChipsComponent } from './chips/chips.component';
 import { AppListsComponent } from './lists/lists.component';
@@ -21,7 +21,7 @@ export const UiComponentsRoutes: Routes = [
       },
       {
         path: 'Vitrina',
-        component: ProductComponent,
+        component: BrandComponent,
       },
       {
         path: 'badge',
