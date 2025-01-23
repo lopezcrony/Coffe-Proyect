@@ -9,7 +9,7 @@ const router = Router();
 router
     .get('/', providerController.getAllProviders)
     .get('/:id', providerController.getOneProvider)
-    .post('/', validateProvider, authenticateJWT, providerController.createProvider)
+    .post('/', validateProvider, providerController.createProvider)
     .put('/:id', validateProvider, authenticateJWT,  providerController.updateProvider)
     .patch('/:id', authenticateJWT, providerController.updateProviderStatus)
     .delete('/:id', authenticateJWT,providerController.deleteOneProvider)

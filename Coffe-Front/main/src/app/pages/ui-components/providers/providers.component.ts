@@ -12,7 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { Proveedor } from './providers.models';
 import { ProvidersService } from './providers-services.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ProviderDetailsDialogComponent } from './provider-details-dialog/provider-details-dialog.component';
+import { ProviderDetailsDialogComponent } from '../provider-dialog/provider-details-dialog.component';
+import { AddProviderDialogComponent } from '../provider-dialog/add-provider-dialog.component';
+
 
 
 
@@ -24,6 +26,7 @@ import { ProviderDetailsDialogComponent } from './provider-details-dialog/provid
            MatDialogModule, 
            MatButtonModule, 
            ProviderDetailsDialogComponent,
+           AddProviderDialogComponent,
           ],
   templateUrl: './providers.component.html',
   styleUrls: ['./providers.component.css'],
@@ -83,8 +86,23 @@ export class ProvidersComponent implements OnInit, AfterViewInit {
 
   openDetailsDialog(provider: Proveedor): void {
     this.dialog.open(ProviderDetailsDialogComponent, {
-      width: '400px', 
+      width: '450px', 
       data: provider, 
     });
   }
+
+  openAddProviderDialog(): void {
+    const dialogRef = this.dialog.open(AddProviderDialogComponent, {
+      width: '500px',
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadProviders(); // Recargar la tabla si se agregó un proveedor
+      }
+    });
+  }
+
+  
+ 
 }

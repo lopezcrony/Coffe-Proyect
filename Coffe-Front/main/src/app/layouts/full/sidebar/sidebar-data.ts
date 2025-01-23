@@ -18,6 +18,11 @@ export const navItems: NavItem[] = [
     route: '/ui-components/Proveedores',
   },
   {
+    displayName: 'Vitrina',
+    iconName: 'archive',
+    route: '/ui-components/Vitrina',
+  },
+  {
     navCap: 'Ui Components',
   },
   {
