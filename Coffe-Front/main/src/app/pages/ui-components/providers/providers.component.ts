@@ -8,8 +8,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
 import { Proveedor } from './providers.models';
 import { ProvidersService } from './providers-services.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ProviderDetailsDialogComponent } from './provider-details-dialog/provider-details-dialog.component';
+
 
 
 @Component({
@@ -17,6 +21,9 @@ import { ProvidersService } from './providers-services.service';
   standalone: true,
   imports: [MaterialModule, MatTableModule, CommonModule, MatCardModule, MatDividerModule,
            MatMenuModule, MatIconModule, TablerIconsModule, MatPaginator, MatPaginatorModule,
+           MatDialogModule, 
+           MatButtonModule, 
+           ProviderDetailsDialogComponent,
           ],
   templateUrl: './providers.component.html',
   styleUrls: ['./providers.component.css'],
@@ -34,10 +41,19 @@ export class ProvidersComponent implements OnInit, AfterViewInit {
   // Referencia al paginador
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private providersService: ProvidersService) {}
+  constructor(private providersService: ProvidersService,  private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.loadProviders(); // Cargar los datos al inicializar el componente
+    // Configurar el filtro personalizado
+    this.dataSource.filterPredicate = (data: Proveedor, filter: string) => {
+      const lowerCaseFilter = filter.toLowerCase();
+      return (
+        data.nombreProveedor.toLowerCase().includes(lowerCaseFilter) ||
+        data.numeroCuenta.toLowerCase().includes(lowerCaseFilter)
+      );
+    };
+
+    this.loadProviders();
   }
 
   ngAfterViewInit(): void {
@@ -56,6 +72,19 @@ export class ProvidersComponent implements OnInit, AfterViewInit {
       error: (err) => {
         console.error('Error al cargar los datos:', err);
       },
+    });
+  }
+
+  applyFilter(event: Event): void {
+    const inputElement = event.target as HTMLInputElement; // Casting explícito
+    const filterValue = inputElement.value.trim().toLowerCase(); // Obtener el valor del input
+    this.dataSource.filter = filterValue; // Asignar el filtro al DataSource
+  }
+
+  openDetailsDialog(provider: Proveedor): void {
+    this.dialog.open(ProviderDetailsDialogComponent, {
+      width: '400px', 
+      data: provider, 
     });
   }
 }
