@@ -60,6 +60,13 @@ class Server{
         this.app.use('/usuarios', require('./routers/users.routes'));
         this.app.use('/login', require('./routers/auth.routes'));
         this.app.use('/marca', require('./routers/brand.routes'));
+        this.app.use('/detalleMarca', require('./routers/brandDetail.routes'));
+        this.app.use('/compras', require('./routers/shoppings.routes'));
+        this.app.use('/detalleCompra', require('./routers/shoppings.routes'));
+        this.app.use('/ventas', require('./routers/sales.routes'));
+        this.app.use('/detalleVentas', require('./routers/shoppingsDetail.routes'));
+
+
 
     }
 
