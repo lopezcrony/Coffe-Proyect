@@ -1,17 +1,16 @@
-.container {
-    max-width: 900px;
-    margin: 0 auto;
+.minimal-search-field {
+    width: 100%;
+    max-width: 300px; /* Ajusta este valor según tu necesidad */
+    margin-right: 8px; /* Espacio a la derecha si es necesario */
   }
   
-  .mat-card {
-    margin-bottom: 16px;
+  .minimal-search-field input {
+    padding: 4px 8px; /* Ajusta el padding para un diseño más compacto */
+    font-size: 14px; /* Tamaño de fuente más pequeño y limpio */
   }
   
-  .mat-divider {
-    margin: 16px 0;
-  }
-  
-  .mt-4 {
-    margin-top: 16px;
+  .minimal-search-field mat-icon {
+    font-size: 20px; /* Tamaño del icono */
+    margin-bottom: -2px; /* Ajuste para alinear verticalmente el icono */
   }
   
