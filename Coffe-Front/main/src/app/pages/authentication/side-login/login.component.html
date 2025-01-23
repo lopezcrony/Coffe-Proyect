@@ -1,0 +1,53 @@
+<!-- login.component.html -->
+<div class="login-container">
+  <mat-card class="login-card" *ngIf="!isLoading">
+    <mat-card-content class="login-content">
+      <div class="logo-section">
+        <a [routerLink]="['/proveedor']">
+          <img src="./assets/images/logos/dark-logo.svg" class="login-logo" alt="EncafeinadosLogo" />
+        </a>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput 
+                 type="email" 
+                 formControlName="correoUsuario" 
+                 placeholder="Ingrese su correo electrónico">
+          <mat-icon matPrefix>email</mat-icon>
+          <mat-error *ngIf="isFieldInvalid('correoUsuario')">
+            {{ getErrorMessage('correoUsuario') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput 
+                 [type]="showPassword ? 'text' : 'password'" 
+                 formControlName="claveUsuario" 
+                 placeholder="Ingrese su contraseña">
+          <mat-icon matPrefix>lock</mat-icon>
+          <button mat-icon-button 
+                  matSuffix 
+                  type="button" 
+                  (click)="toggleShowPassword()"
+                  [attr.aria-label]="'Alternar visibilidad de contraseña'">
+            <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="isFieldInvalid('claveUsuario')">
+            {{ getErrorMessage('claveUsuario') }}
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button 
+                color="primary" 
+                type="submit" 
+                class="full-width login-button"
+                [disabled]="loginForm.invalid">
+          Iniciar Sesión
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

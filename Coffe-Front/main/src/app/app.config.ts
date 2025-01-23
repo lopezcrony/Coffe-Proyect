@@ -3,6 +3,7 @@ import {
   provideZoneChangeDetection,
   importProvidersFrom,
 } from '@angular/core';
+
 import {
   HttpClient,
   provideHttpClient,
@@ -16,6 +17,7 @@ import {
 } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideClientHydration } from '@angular/platform-browser';
+import { ToastrModule } from 'ngx-toastr';
 // import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -47,6 +49,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withInterceptorsFromDi()),
     provideClientHydration(),
+    
     provideAnimationsAsync(),
     importProvidersFrom(
       FormsModule,
@@ -61,6 +64,11 @@ export const appConfig: ApplicationConfig = {
       //     deps: [HttpClient],
       //   }, 
       // })
+      ToastrModule.forRoot({
+        positionClass: 'toast-bottom-right',
+        timeOut: 3000,
+        preventDuplicates: true,
+      }),
     ),
   ],
 };
