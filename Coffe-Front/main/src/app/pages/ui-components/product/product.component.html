@@ -14,7 +14,27 @@
   
       <!-- Aquí iría tu contenido principal -->
       <div class="content-container">
-        <!-- Contenido de la tabla o lista de proveedores -->
+        <div class="col-sm-3 col-lg-1">
+          <mat-card class="product-card">
+            <!-- Imagen del producto -->
+            <a routerLink="/widgets/cards">
+              <img
+                mat-card-image
+                src="/assets/images/products/s11.jpg"
+                alt="Producto"
+                class="product-image"
+              />
+            </a>
+        
+            <!-- Contenido del producto -->
+            <mat-card-content class="product-content">
+        
+              <!-- Título del producto -->
+              <mat-card-title class="product-title">Nestle</mat-card-title>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        
       </div>
     </mat-card-content>
   

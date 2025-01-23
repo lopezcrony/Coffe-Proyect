@@ -1,0 +1,42 @@
+.col-sm-6.col-lg-3 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .product-card {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-content {
+    position: relative;
+    padding: 16px;
+  }
+  
+  .cart-button {
+    position: absolute;
+    top: -20px;
+    right: 16px;
+    z-index: 10;
+  }
+  
+  .product-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0 8px;
+  }
+  
+  mat-icon {
+    font-size: 18px;
+  }
+  
