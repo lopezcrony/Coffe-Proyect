@@ -3,7 +3,7 @@ const moment = require('moment');
 
 const validateShopping = [
     // Validar campos dentro de 'shopping'
-    body('shopping.fechaCompra')
+    body('fechaCompra')
         .notEmpty().withMessage('La fecha de compra es obligatoria')
         .custom(value => {
             if (!moment(value, 'YYYY-MM-DD', true).isValid()) {
