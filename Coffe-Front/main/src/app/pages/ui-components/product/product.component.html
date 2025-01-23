@@ -15,7 +15,7 @@
       <!-- Contenedor de tarjetas -->
       <div class="cards-container d-flex flex-wrap justify-content-center gap-4">
         <div class="card-wrapper" *ngFor="let product of products">
-          <mat-card class="product-card p-2">
+          <mat-card class="product-card">
             <!-- Imagen del producto -->
             <a [routerLink]="product.link">
               <img
