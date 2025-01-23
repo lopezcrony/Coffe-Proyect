@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Crear Nueva Marca</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="brandForm" class="d-flex flex-column gap-3">
+    <!-- Campo: Nombre de la marca -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre de la marca</mat-label>
+      <input matInput formControlName="nombreMarca" placeholder="Ej: Café Antioqueño" />
+      <mat-error *ngIf="brandForm.get('nombreMarca')?.hasError('required')">
+        El nombre de la marca es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo: URL de la imagen -->
+    <mat-form-field appearance="fill">
+      <mat-label>URL de la imagen</mat-label>
+      <input matInput formControlName="imagenURL" placeholder="Ej: s6" />
+      <mat-error *ngIf="brandForm.get('imagenURL')?.hasError('required')">
+        La URL de la imagen es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Campo: Descripción -->
+    <mat-form-field appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <textarea
+        matInput
+        formControlName="descripcionMarca"
+        placeholder="El orgullo de Antioquia en cada taza"
+      ></textarea>
+      <mat-error *ngIf="brandForm.get('descripcionMarca')?.hasError('required')">
+        La descripción es obligatoria
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="warn" (click)="closeDialog()">Cerrar</button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="!brandForm.valid">
+    Crear
+  </button>
+</mat-dialog-actions>

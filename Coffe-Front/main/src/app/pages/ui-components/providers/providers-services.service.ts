@@ -6,6 +6,8 @@ import { Proveedor } from './providers.models';
 @Injectable({
   providedIn: 'root',
 })
+
+
 export class ProvidersService {
   private apiUrl = 'http://localhost:3500/proveedores';
 
