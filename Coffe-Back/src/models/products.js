@@ -20,7 +20,7 @@ const Producto = sequelize.define('Producto', {
       unique: true,
       allowNull: false,
       validate: {
-        is: /^[a-zA-Záéíóúñ ]+$/
+        is: /^[0-9a-zA-Záéíóúñ ]+$/
       }
     },
     stock: {

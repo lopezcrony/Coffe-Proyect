@@ -13,6 +13,10 @@ const Caracteristica = sequelize.define('Caracteristica', {
       allowNull: false
     },
 
+    estadoCaracteristica:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    }
    
   }, {tableName: 'caracteristicas',
     timestamps: false});
