@@ -9,7 +9,7 @@ const startServer = async () => {
 
     // Sincronizar modelos
     models;
-     await sequelize.sync({ alter: true });
+    //  await sequelize.sync({ alter: true });
 
     // Crear e iniciar el servidor
     const server = new Server();

@@ -68,6 +68,8 @@ class Server{
         this.app.use('/atributos', require('./routers/attribute.routes'));
         this.app.use('/atributosProducto', require('./routers/attributeProduct.routes'));
         this.app.use('/imagenProducto', require('./routers/pictureProduct.routes'));
+        this.app.use('/ajustes', require('./routers/adjustments.routes'));
+
     }
 
     Initiate(){

@@ -15,11 +15,20 @@ const Ajuste = sequelize.define('Ajuste', {
         key: 'idProducto'
       }
     },
+    idUsuario: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'usuarios',
+        key: 'idUsuario'
+      }
+    },
     motivoAjuste: {
       type: DataTypes.STRING(100),
       allowNull: false,
       validate: {
-        is: /^[a-zA-Záéíóúñ ]+$/
+        is: /^[a-zA-Záéíóúñ ]+$/,
+        notEmpty: true
       }
     },
     cantidad: {
@@ -33,15 +42,15 @@ const Ajuste = sequelize.define('Ajuste', {
     estadoAjuste: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
-    },
+    }
+}, {
+    tableName: 'Ajustes',
+    timestamps: false
+});
 
-    
-  },{tableName: 'Ajustes',
-    timestamps: false});
-
-
-  Ajuste.associate = (models) => {
+Ajuste.associate = (models) => {
     Ajuste.belongsTo(models.Producto, { foreignKey: 'idProducto', as: 'producto' });
-  };
-  
-  module.exports = Ajuste;
+    Ajuste.belongsTo(models.Usuario, { foreignKey: 'idUsuario', as: 'usuario' });
+};
+
+module.exports = Ajuste;
