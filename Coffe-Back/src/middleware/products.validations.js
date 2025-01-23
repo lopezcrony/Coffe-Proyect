@@ -2,16 +2,16 @@ const { body, validationResult } = require('express-validator');
 
 const validateProducts = [
     body('nombreProducto')
-        .notEmpty().withMessage('el nombre del producto es obligatoria'),
-        // .matches(/^[a-zA-Záéíóúñ ]+$/).withMessage('Los caracteres no son validos'),
+        .notEmpty().withMessage('El nombre del producto es obligatorio')
+        .matches(/^[0-9a-zA-Záéíóúñ ]+$/).withMessage('Los caracteres no son válidos'),
 
     body('stock')
         .notEmpty().withMessage('El stock es obligatorio')
-        .matches('^[0-9]+$').withMessage('Solo son validos numeros'),
-        
+        .isInt({ min: 0 }).withMessage('El stock debe ser un número entero no negativo'),
+
     body('precioVenta')
-        .notEmpty().withMessage('El precio venta es obligatorio')
-        .matches('^(|[1-9][0-9]*)(\\.[0-9]+)?$').withMessage('Solo son validos numeros'),
+        .notEmpty().withMessage('El precio de venta es obligatorio')
+        .isFloat({ min: 0 }).withMessage('El precio de venta debe ser un número positivo'),
 
     (req, res, next) => {
         const errors = validationResult(req);
