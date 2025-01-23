@@ -5,8 +5,8 @@
   }
   
   .product-card {
-    width: 60%;
-    max-width: 230px;
+    width: 90%;
+    max-width: 200px;
     border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
@@ -38,5 +38,14 @@
   
   mat-icon {
     font-size: 18px;
+  }
+  /* Añadir margen entre el header y las cards */
+.header-section {
+    margin-bottom: 2rem; /* Espaciado inferior del header */
+  }
+  
+  /* Añadir padding y margen general a las secciones */
+  .content-section {
+    padding: 1rem; /* Espaciado interno */
   }
   
