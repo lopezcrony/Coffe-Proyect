@@ -10,7 +10,7 @@ router
     .get('/', providerController.getAllProviders)
     .get('/:id', providerController.getOneProvider)
     .post('/', validateProvider, providerController.createProvider)
-    .put('/:id', validateProvider, authenticateJWT,  providerController.updateProvider)
+    .put('/:id', validateProvider, providerController.updateProvider)
     .patch('/:id', authenticateJWT, providerController.updateProviderStatus)
     .delete('/:id', authenticateJWT,providerController.deleteOneProvider)
 

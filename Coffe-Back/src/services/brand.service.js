@@ -23,8 +23,8 @@ const createBrand = async (BrandData) => {
     try {
         return await brandRepository.createBrand(BrandData);
     } catch (error) {
-        if (error.message.includes('nombreMarca')) {
-            throw new Error('Ya existe una con ese nombre.');
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            throw new Error('Ya existe un producto con ese nombre.');
         }
         throw error;
     }

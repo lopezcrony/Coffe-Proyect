@@ -1,58 +1,48 @@
-// const Categories = require('../models/categories.model');
-// const Product = require('../models/products.model');
-
-// const findAllCategories = async () => {
-//     return await Categories.findAll();
-// };
-
-// const findCategorieById = async (id) => {
-//     return await Categories.findByPk(id);
-// };
-
-// const createCategorie = async (categorieData) => {
-//     return await Categories.create(categorieData);
-// };
-
-// const updateCategorie = async (id, categorieData) => {
-//     const categorie = await findCategorieById(id);
-//     if (categorie) {
-//         return await categorie.update(categorieData);
-//     }
-//     throw new Error('categoria no encontrada');
-// };
-
-// const updateCategorieStatus = async (id, status) => {
-
-//     const categorie = await findCategorieById(id);
-//     if (categorie) {
-//         return await categorie.update({estadoCategoria : status});
-//     }
-//     throw new Error('REPOSITORY: Categoria no encontrada');
-// };
-
-// const checkIfCategoryHasProducts = async (categoryId) => {
-//     try {
-//         const products = await Product.findAll({ where: { idCategoria: categoryId } });
-//         return products.length > 0;
-//     } catch (error) {
-//         throw new Error('Error al verificar los productos de la categoría: ' + error.message);
-//     }
-// };
-
-// const deleteCategorie = async (id) => {
-//     const result = await Categories.destroy({
-//         where: { 	idCategoria: id }
-//     });
-//     return result;
-// };
+const Attributes = require('../models/Attributes.model');
 
 
-// module.exports = {
-//     findAllCategories,
-//     findCategorieById,
-//     createCategorie,
-//     updateCategorie,
-//     updateCategorieStatus,
-//     deleteCategorie,
-//     checkIfCategoryHasProducts
-// };
+const findAllAttributes = async () => {
+    return await Attributes.findAll();
+};
+
+const findAttributeById = async (id) => {
+    return await Attributes.findByPk(id);
+};
+
+const createAttribute = async (AttributeData) => {
+    return await Attributes.create(AttributeData);
+};
+
+const updateAttribute = async (id, AttributeData) => {
+    const Attribute = await findAttributeById(id);
+    if (Attribute) {
+        return await Attribute.update(AttributeData);
+    }
+    throw new Error('Atributo no encontrado');
+};
+
+const updateAttributeStatus = async (id, status) => {
+
+    const Attribute = await findAttributeById(id);
+    if (Attribute) {
+        return await Attribute.update({estadoCaracteristica : status});
+    }
+    throw new Error('REPOSITORY: Atributo no encontrada');
+};
+
+const deleteAttribute = async (id) => {
+    const result = await Attributes.destroy({
+        where: { 	idCategoria: id }
+    });
+    return result;
+};
+
+
+module.exports = {
+    findAllAttributes,
+    findAttributeById,
+    createAttribute,
+    updateAttribute,
+    updateAttributeStatus,
+    deleteAttribute
+};
