@@ -1,4 +1,4 @@
-const Attributes = require('../models/Attributes.model');
+const Attributes = require('../models/Attributes');
 
 
 const findAllAttributes = async () => {

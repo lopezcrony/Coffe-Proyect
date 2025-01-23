@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const attributeController = require("../controllers/attribute.controller");
-const { validateCategorie } = require("../middlewares/categories.validations");
+const {validateCaracteristica } = require("../middleware/attributes.validations");
 
 const { } = require('../middleware/auth.validation');
 
@@ -8,10 +8,10 @@ const { } = require('../middleware/auth.validation');
 const router = Router();
 
 router
-    .get('/', attributeController.getAllCategories)
-    .get('/:id', attributeController.getOneCategorie)
-    .post('/', validateCategorie, attributeController.createCategorie)
-    .put('/:id', validateCategorie, attributeController.updateCategorie)
-    .patch('/:id',attributeController.updateCategorieStatus)
+    .get('/', attributeController.getAllAttributes)
+    .get('/:id', attributeController.getOneAttribute)
+    .post('/', validateCaracteristica, attributeController.createAttribute)
+    .put('/:id', validateCaracteristica, attributeController.updateAttribute)
+    .patch('/:id',attributeController.updateAttributeStatus)
 
 module.exports = router;

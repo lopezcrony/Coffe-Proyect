@@ -65,9 +65,9 @@ class Server{
         this.app.use('/detalleCompra', require('./routers/shoppings.routes'));
         this.app.use('/ventas', require('./routers/sales.routes'));
         this.app.use('/detalleVentas', require('./routers/shoppingsDetail.routes'));
-
-
-
+        this.app.use('/atributos', require('./routers/attribute.routes'));
+        this.app.use('/atributosProducto', require('./routers/attributeProduct.routes'));
+        this.app.use('/imagenProducto', require('./routers/pictureProduct.routes'));
     }
 
     Initiate(){
