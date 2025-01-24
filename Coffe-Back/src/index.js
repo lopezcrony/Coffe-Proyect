@@ -54,6 +54,7 @@ class Server{
     };
 
     routes(){
+        
         this.app.use('/proveedores', require('./routers/providers.routes'));
         this.app.use('/productos', require('./routers/products.routes'));
         this.app.use('/roles', require('./routers/roles.routes'));
