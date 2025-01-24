@@ -54,6 +54,7 @@ class Server{
     };
 
     routes(){
+        
         this.app.use('/proveedores', require('./routers/providers.routes'));
         this.app.use('/productos', require('./routers/products.routes'));
         this.app.use('/roles', require('./routers/roles.routes'));
@@ -68,6 +69,7 @@ class Server{
         this.app.use('/atributos', require('./routers/attribute.routes'));
         this.app.use('/atributosProducto', require('./routers/attributeProduct.routes'));
         this.app.use('/imagenProducto', require('./routers/pictureProduct.routes'));
+        this.app.use('/imagenes', require('./routers/images.routes'));
     }
 
     Initiate(){
