@@ -73,3 +73,12 @@
   .search-button mat-icon {
     font-size: 20px; /* Ajustar el tamaño del icono */
   }
+
+  .clickable {
+    cursor: pointer; /* Cambia el cursor a puntero */
+  }
+  
+  .clickable:hover {
+  
+    opacity: 0.8;
+  }

@@ -137,6 +137,6 @@ export class BrandComponent implements OnInit {
 
   redirectToProducts(idMarca: number): void {
     console.log('Redirigiendo a Productos con idMarca:', idMarca);
-    this.router.navigate(['/Productos/', idMarca]);
+    this.router.navigate(['/ui-components/Productos', idMarca]);
   }
 }

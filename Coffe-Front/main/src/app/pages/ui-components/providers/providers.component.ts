@@ -22,37 +22,36 @@ import { AddProviderDialogComponent } from '../provider-dialog/add-provider-dial
   selector: 'app-providers',
   standalone: true,
   imports: [MaterialModule, MatTableModule, CommonModule, MatCardModule, MatDividerModule,
-           MatMenuModule, MatIconModule, TablerIconsModule, MatPaginator, MatPaginatorModule,
-           MatDialogModule, 
-           MatButtonModule, 
-           ProviderDetailsDialogComponent,
-           AddProviderDialogComponent,
-          ],
+    MatMenuModule, MatIconModule, TablerIconsModule, MatPaginator, MatPaginatorModule,
+    MatDialogModule,
+    MatButtonModule,
+    ProviderDetailsDialogComponent,
+    AddProviderDialogComponent,
+  ],
   templateUrl: './providers.component.html',
   styleUrls: ['./providers.component.css'],
-  
- 
-  
+
+
+
 })
 export class ProvidersComponent implements OnInit, AfterViewInit {
   // Definir las columnas de la tabla
   displayedColumns: string[] = ['nombreProveedor', 'numeroCuenta', 'estadoProveedor', 'Acciones'];
-  
+
   // DataSource para la tabla de Material
   dataSource = new MatTableDataSource<Proveedor>([]);
-  
+
   // Referencia al paginador
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private providersService: ProvidersService,  private dialog: MatDialog) {}
+  constructor(private providersService: ProvidersService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     // Configurar el filtro personalizado
     this.dataSource.filterPredicate = (data: Proveedor, filter: string) => {
       const lowerCaseFilter = filter.toLowerCase();
       return (
-        data.nombreProveedor.toLowerCase().includes(lowerCaseFilter) ||
-        data.numeroCuenta.toLowerCase().includes(lowerCaseFilter)
+        data.nombreProveedor.toLowerCase().includes(lowerCaseFilter)
       );
     };
 
@@ -86,8 +85,8 @@ export class ProvidersComponent implements OnInit, AfterViewInit {
 
   openDetailsDialog(provider: Proveedor): void {
     this.dialog.open(ProviderDetailsDialogComponent, {
-      width: '450px', 
-      data: provider, 
+      width: '450px',
+      data: provider,
     });
   }
 
@@ -95,7 +94,7 @@ export class ProvidersComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(AddProviderDialogComponent, {
       width: '500px',
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.loadProviders(); // Recargar la tabla si se agregó un proveedor
@@ -103,6 +102,6 @@ export class ProvidersComponent implements OnInit, AfterViewInit {
     });
   }
 
-  
- 
+
+
 }

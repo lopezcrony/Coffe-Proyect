@@ -1,6 +1,133 @@
 <mat-card class="cardWithShadow">
-    <mat-card-content>
-      <mat-card-title>Sample Page</mat-card-title>
-      <mat-card-subtitle class="mat-body-1">This is test page</mat-card-subtitle>
-    </mat-card-content>
-  </mat-card>
+  <mat-card-header class="header-section mb-4">
+    <mat-card-title class="w-100 text-center">
+      <div class="d-flex align-items-center justify-content-center">
+        <mat-icon class="text-primary me-2">inventory_2</mat-icon>
+        <span class="text-primary fw-bold fs-4">Productos</span>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- Barra de búsqueda y botón de agregar -->
+    <div
+      class="search-action-container mb-4 d-flex justify-content-between align-items-center"
+    >
+      <button
+        mat-raised-button
+        color="primary"
+        class="rounded-pill px-4"
+        matTooltip="Agregar Producto"
+        
+      >
+        <mat-icon class="me-2">add</mat-icon>
+        <span>Agregar</span>
+      </button>
+
+      <mat-form-field
+        class="minimal-search-field"
+        matTooltip="Buscar por nombre o cuenta"
+      >
+        <mat-label>Buscar proveedor</mat-label>
+        <input
+          matInput
+          placeholder="Ingrese nombre del proveedor o número de cuenta"
+          (input)="applyFilter($event)"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <!-- Aquí iría tu contenido principal -->
+    <div class="content-container">
+      <!-- Contenido de la tabla o lista de proveedores -->
+    </div>
+  </mat-card-content>
+  <mat-card-content>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource1" class="w-100">
+        <!-- Nombre del Producto -->
+        <ng-container matColumnDef="nombreProducto">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-w-600 mat-subtitle-1 f-s-14 p-l-0"
+          >
+            Product
+          </th>
+          <td mat-cell *matCellDef="let element" class="p-l-0">
+            <div class="d-flex align-items-center">
+              <img
+                [src]="'../../../../assets/images/products/s13.JPG'"
+                alt="users"
+                width="60"
+                class="rounded"
+              />
+              <div class="m-l-16">
+                <h6 class="mat-subtitle-1 f-s-14 f-w-600">
+                  {{ element.nombreProducto }}
+                </h6>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Stock -->
+        <ng-container matColumnDef="stock">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-w-600 mat-subtitle-1 f-s-14"
+          >
+            Stock
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.stock }}
+          </td>
+        </ng-container>
+
+        <!-- Precio de Venta -->
+        <ng-container matColumnDef="precioVenta">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-w-600 mat-subtitle-1 f-s-14"
+          >
+            Precio
+          </th>
+          <td mat-cell *matCellDef="let element">
+            ${{ element.precioVenta | number : "1.0-0" }}
+          </td>
+        </ng-container>
+
+        <!-- Estado -->
+        <ng-container matColumnDef="estadoProducto">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            class="f-w-600 mat-subtitle-1 f-s-14"
+          >
+            Estado
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span
+              [ngClass]="{
+                'text-success': element.estadoProducto,
+                'text-error': !element.estadoProducto
+              }"
+            >
+              {{ element.estadoProducto ? "Activo" : "Inactivo" }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Acciones -->
+       
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+      </table>
+      <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>
