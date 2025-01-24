@@ -90,6 +90,10 @@ Usuario.associate = (models) => {
   Usuario.belongsTo(models.Roles, { foreignKey: 'idRol', as: 'rol' });
 };
 
+Usuario.associate = (models) => {
+  Usuario.hasMany(models.Ajuste, { foreignKey: 'idUsuario', as: 'ajustes' });
+};
+
 module.exports = Usuario
 
 
