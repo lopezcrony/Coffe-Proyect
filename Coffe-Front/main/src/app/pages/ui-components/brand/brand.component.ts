@@ -9,13 +9,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { BrandService } from './brand.service';
-import { Brand } from './brand.models';
+import { Brand, BrandForm, CreateBrandPayload } from './brand.models'; // Importar BrandForm
 import { CreateBrandDialogComponent } from '../brand-dialog/brand-add-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AppDialogContentComponent } from '../brand-dialog/brand-details-dialog.component';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-product',
@@ -48,7 +50,7 @@ export class BrandComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private dialog: MatDialog, private brandService: BrandService, private router: Router) {}
+  constructor(private dialog: MatDialog, private brandService: BrandService, private router: Router,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadBrands();
@@ -94,22 +96,22 @@ export class BrandComponent implements OnInit {
   openCreateBrandDialog(): void {
     const dialogRef = this.dialog.open(CreateBrandDialogComponent);
 
-    dialogRef.afterClosed().subscribe((result: Brand) => {
+    dialogRef.afterClosed().subscribe((result: BrandForm) => { // Cambiar a BrandForm
       if (result) {
         this.createBrand(result);
       }
     });
   }
 
-  private createBrand(newBrand: Brand): void {
-    const payload = {
+  private createBrand(newBrand: BrandForm): void { // Cambiar a BrandForm
+    const payload: CreateBrandPayload = {
       brandData: {
         nombreMarca: newBrand.nombreMarca,
         descripcionMarca: newBrand.descripcionMarca,
         imagenURL: newBrand.imagenURL,
       },
       detalleMarcaData: {
-        idProveedor: 1, // Ajusta este valor dinámicamente si es necesario
+        idProveedor: newBrand.idProveedor, // Utiliza el valor seleccionado en el formulario
       },
     };
   
@@ -120,11 +122,10 @@ export class BrandComponent implements OnInit {
         this.applyFilter(new Event('input')); // Actualiza la lista filtrada
       },
       (error) => {
-        console.error('Error al crear la marca:', error);
+        this.toastr.error(error.message, 'El nombre es único');
       }
     );
   }
-
 
   openBrandDialog(product: Brand): void {
     this.dialog.open(AppDialogContentComponent, {

@@ -31,15 +31,14 @@
 
     <!-- Campo: ID del proveedor -->
     <mat-form-field appearance="fill">
-      <mat-label>ID del proveedor</mat-label>
-      <input
-        matInput
-        type="number"
-        formControlName="idProveedor"
-        placeholder="Ej: 1"
-      />
+      <mat-label>Proveedor</mat-label>
+      <mat-select formControlName="idProveedor">
+        <mat-option *ngFor="let provider of dataSource.data" [value]="provider.idProveedor">
+          {{ provider.nombreProveedor }}
+        </mat-option>
+      </mat-select>
       <mat-error *ngIf="brandForm.get('idProveedor')?.hasError('required')">
-        El ID del proveedor es obligatorio
+        El proveedor es obligatorio
       </mat-error>
     </mat-form-field>
   </form>

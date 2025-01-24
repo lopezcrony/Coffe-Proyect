@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Brand, CreateBrandPayload } from './brand.models';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BrandService {
-  private apiUrl = 'http://localhost:3500/marca';
+  private apiUrl = `${environment.apiUrl}/marca`;
 
   constructor(private http: HttpClient) {}
 
@@ -51,6 +52,7 @@ export class BrandService {
     });
   }
 
+ 
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string;
     if (error.error instanceof ErrorEvent) {

@@ -44,7 +44,7 @@ export class ProvidersComponent implements OnInit, AfterViewInit {
   // Referencia al paginador
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private providersService: ProvidersService,  private dialog: MatDialog) {}
+  constructor(private providersService: ProvidersService,  private dialog: MatDialog ) {}
 
   ngOnInit(): void {
     // Configurar el filtro personalizado
