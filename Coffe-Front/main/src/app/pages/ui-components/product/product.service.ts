@@ -2,28 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Product } from './product.models';
+import { environment } from 'src/environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3500/products';
+  private apiUrl = `${environment.apiUrl}/products`;
 
   constructor(private http: HttpClient) {}
 
-  getAllProviders(): Observable<Product[]> {
+  getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
-  createProvider(Product: Product): Observable<Product> {
+  createProduct(Product: Product): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, Product, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateProvider(Product: Product): Observable<Product> {
+  updateProduct(Product: Product): Observable<Product> {
     return this.http.put<Product>(
       `${this.apiUrl}/${Product.idProducto}`,
       Product,
@@ -31,7 +32,7 @@ export class ProductService {
     ).pipe(catchError(this.handleError));
   }
 
-  updateStatusProvider(id: number, status: boolean): Observable<Product> {
+  updateStatusProduct(id: number, status: boolean): Observable<Product> {
     return this.http.patch<Product>(
       `${this.apiUrl}/${id}`,
       { estadoProduct: status },
@@ -39,7 +40,7 @@ export class ProductService {
     ).pipe(catchError(this.handleError));
   }
 
-  deleteProvider(id: number): Observable<void> {
+  deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
