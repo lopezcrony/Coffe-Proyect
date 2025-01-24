@@ -4,34 +4,69 @@
     <mat-card-title class="w-100 text-center">
       <div class="d-flex align-items-center justify-content-center">
         <mat-icon class="text-primary me-2">inventory_2</mat-icon>
-        <span class="text-primary fw-bold fs-4">Vitrina de Marcas</span>
+        <span class="text-primary fw-bold fs-4">Gestión de Marcas</span>
       </div>
     </mat-card-title>
-    <button mat-flat-button color="primary" (click)="openCreateBrandDialog()">Crear Marca</button>
   </mat-card-header>
+  <mat-card-content>
+    <div
+      class="search-action-container mb-4 d-flex justify-content-between align-items-center"
+    >
+      <button
+        mat-raised-button
+        color="primary"
+        class="rounded-pill px-4"
+        matTooltip="Agregar Proveedor"
+        (click)="openCreateBrandDialog()"
+      >
+        <mat-icon class="me-2">add</mat-icon>
+        <span>Agregar Marca</span>
+      </button>
+
+      <mat-form-field appearance="outline" class="minimal-search-field" matTooltip="Buscar por nombre de marca">
+        <mat-label>Buscar Marca</mat-label>
+        <input
+          matInput
+          placeholder="Ingrese nombre del proveedor o número de cuenta"
+          (input)="applyFilter($event)" 
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      
+    </div>
+
+    <!-- Aquí iría tu contenido principal -->
+    <div class="content-container">
+      <!-- Contenido de la tabla o lista de proveedores -->
+    </div>
+  </mat-card-content>
 
   <!-- Contenido principal -->
   <mat-card-content class="content-section mt-4">
     <div class="table-responsive">
-      <div class="cards-container d-flex flex-wrap justify-content-center gap-4">
-        <div class="card-wrapper" *ngFor="let product of paginatedProducts">
-          <mat-card class="product-card">
-            <img
-              mat-card-image
-              [src]="'../../../../assets/images/products/s9.jpg'"
-              [alt]="product.nombreMarca"
-              class="product-image"
-            />
-            <mat-card-content class="product-content">
-              <mat-card-title class="product-title text-center">
-                {{ product.nombreMarca }}
-              </mat-card-title>
-              <p class="product-description text-center">
-                {{ product.descripcionMarca }}
-              </p>
-            </mat-card-content>
-          </mat-card>
-        </div>
+      <div
+        class="cards-container d-flex flex-wrap justify-content-center gap-4"
+      >
+      <div class="card-wrapper" *ngFor="let product of paginatedProducts">
+        <mat-card class="product-card">
+          <img
+            mat-card-image
+            [src]="'../../../../assets/images/products/s12.jpg'"
+            [alt]="product.nombreMarca"
+            class="product-image"
+            matTooltip="Seleccionar marca"
+          />
+          <mat-card-content class="product-content">
+            <mat-card-title class="product-title text-center">
+              {{ product.nombreMarca }}
+            </mat-card-title>
+            <button mat-button color="primary" (click)="openBrandDialog(product)" class="w-100">
+              Más información
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      
       </div>
     </div>
 
@@ -39,7 +74,6 @@
     <mat-paginator
       [length]="products.length"
       [pageSize]="pageSize"
-      [pageSizeOptions]="[5, 10, 25, 100]"
       (page)="onPageChange($event)"
     >
     </mat-paginator>

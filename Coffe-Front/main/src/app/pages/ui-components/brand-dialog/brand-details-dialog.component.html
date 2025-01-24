@@ -1,16 +1,8 @@
-<button mat-flat-button color="primary" (click)="openHeaderDialog()" class="w-100">
-    Open Scrollable Dialog
-    </button>
-    <!-- dialog view -->
-    <h2 mat-dialog-title>Informacion de marca</h2>
-    <mat-dialog-content class="mat-typography">
-    <h3 class="f-s-16 f-w-600 m-t-16">Descripcion</h3>
-    <p class="f-s-14 lh-24">
-    Learn one way to build applications with Angular and reuse your code and
-    abilities to build apps for any deployment target. For web, mobile web,
-    native mobile and native desktop.
-    </p>
-    </mat-dialog-content>
-    <mat-dialog-actions align="end">
-    <button mat-flat-button class="bg-error text-white" mat-dialog-close>Cerrar</button>
-    </mat-dialog-actions>
+<h2 mat-dialog-title>Información de la Marca</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>{{ data.nombreMarca }}</h3>
+  <p>{{ data.descripcionMarca }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

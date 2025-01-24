@@ -6,11 +6,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 	import {JsonPipe} from '@angular/common';
+  import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-brand-dialog',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,

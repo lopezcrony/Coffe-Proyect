@@ -49,3 +49,27 @@
     padding: 1rem; /* Espaciado interno */
   }
   
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem; /* Espacio entre el input y el botón */
+    margin-bottom: 1.5rem; /* Separación del contenido principal */
+  }
+  
+  .mat-form-field {
+    flex-grow: 1; /* Permitir que el input ocupe todo el ancho posible */
+    max-width: 600px; /* Limitar el tamaño máximo del campo */
+  }
+  
+  .search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem; /* Espacio horizontal más grande para un diseño cómodo */
+    white-space: nowrap; /* Evitar que el texto se corte */
+  }
+  
+  .search-button mat-icon {
+    font-size: 20px; /* Ajustar el tamaño del icono */
+  }
