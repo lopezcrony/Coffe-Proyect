@@ -1,4 +1,6 @@
 const brandRepository = require('../repository/brands.repository');
+const detalleMarcaRepository = require('../repository/brandDetail.repository'); // Asegúrate de tener el repositorio del detalle de la marca
+const {sequelize} = require('../config/dataBase')
 
 const getAllBrands = async () => {
     try {
@@ -19,14 +21,26 @@ const getOneBrand = async (id) => {
     }
 };
 
-const createBrand = async (BrandData) => {
+const createBrand = async (brandData, detalleMarcaData) => {
+    const transaction = await sequelize.transaction();
     try {
-        return await brandRepository.createBrand(BrandData);
+        // Crear la marca
+        const newBrand = await brandRepository.createBrand(brandData, { transaction });
+
+        // Crear el detalle de la marca
+        const newDetalleMarca = await detalleMarcaRepository.addMarcaToProveedor({
+            idMarca: newBrand.idMarca,
+            ...detalleMarcaData
+        }, { transaction });
+
+        await transaction.commit();
+        return { newBrand, newDetalleMarca };
     } catch (error) {
+        await transaction.rollback();
         if (error.name === 'SequelizeUniqueConstraintError') {
-            throw new Error('Ya existe un producto con ese nombre.');
+            throw new Error('Ya existe una marca con ese nombre.');
         }
-        throw error;
+        throw new Error('SERVICE: ' + error.message);
     }
 };
 

@@ -2,7 +2,6 @@ const { Router } = require("express");
 const { validateRoles } = require('../middleware/roles.validations');
 const rolesController = require("../controllers/roles.controller");
 
-const { } = require('../middleware/auth.validation');
 
 const router = Router();
 

@@ -31,6 +31,18 @@ const DetalleCompra = sequelize.define('DetalleCompra', {
       type: DataTypes.FLOAT,
       allowNull: false
     },
+    fechaCompra: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    fechaTostion: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    fechaVencimiento: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
 
     
   },{tableName: 'detalleCompra',

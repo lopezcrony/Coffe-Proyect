@@ -28,35 +28,32 @@ const getShoppingByProvider = async (id) => {
     }
 };
 
-const createShopping = async (shoppingData, shoppingDetails) => {
+const createShopping = async (compraData, detallesData) => {
     const transaction = await sequelize.transaction();
     try {
         // Crear la compra
-        const newShopping = await shoppingRepository.createShopping(shoppingData, { transaction });
+        const newCompra = await shoppingRepository.createShopping(compraData, { transaction });
 
-        // Crear los detalles de compra
-        for (const detail of shoppingDetails) {
-            detail.idCompra = newShopping.idCompra;
+        // Crear los detalles de compra y actualizar el stock de productos
+        for (const detail of detallesData) {
+            detail.idCompra = newCompra.idCompra; // Corregido aquí
 
-            const newShoppingDetail = await shoppingDetailRepository.createShoppingDetail(detail, { transaction });
+            const newDetalleCompra = await shoppingDetailRepository.createShoppingDetail(detail, { transaction });
 
-            // Actualiza el stock de un producto
-            product = await productRepository.findProductById(newBarCode.idProducto)
-            const newStock = product.stock + newShoppingDetail.cantidadProducto;
+            // Actualizar el stock del producto
+            const product = await productRepository.findProductById(detail.idProducto, { transaction });
+            if (!product) {
+                throw new Error('Producto no encontrado.');
+            }
+            const newStock = product.stock + newDetalleCompra.cantidadProducto;
             await productRepository.updateProductoStock(product.idProducto, newStock, { transaction });
         }
-        // Guardar cambios en la compra
-        await newShopping.save({ transaction });
 
         await transaction.commit();
-        return newShopping;
+        return newCompra;
     } catch (error) {
-        // Deshace todo en caso de error 
         await transaction.rollback();
-        if (error.name === 'SequelizeUniqueConstraintError') {
-            throw new Error('Ya existe una compra con ese numero de factura.');
-        }
-        throw new Error('SERVICE:' + error.message);
+        throw new Error('SERVICE: ' + error.message);
     }
 };
 

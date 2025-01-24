@@ -15,18 +15,6 @@ const Compra = sequelize.define('Compra', {
         key: 'idProveedor'
       }
     },
-    fechaCompra: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    fechaTostion: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    fechaVencimiento: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
     valorCompra: {
       type: DataTypes.FLOAT,
       allowNull: false

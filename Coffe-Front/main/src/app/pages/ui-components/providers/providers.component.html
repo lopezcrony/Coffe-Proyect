@@ -99,14 +99,6 @@
               }}</span>
 
               <!-- Botón para agregar marca -->
-              <button
-                mat-icon-button
-                color="primary"
-                class="action-button"
-                matTooltip="Agregar Marca"
-              >
-                <mat-icon>add_business</mat-icon>
-              </button>
 
               <!-- Botón para ver detalles -->
               <button
@@ -120,25 +112,8 @@
               </button>
 
               <!-- Menú de opciones -->
-              <button
-                mat-icon-button
-                color="warn"
-                [matMenuTriggerFor]="menu"
-                class="action-button"
-                matTooltip="Más opciones"
-              >
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" class="cardWithShadow">
-                <button mat-menu-item>
-                  <mat-icon>edit</mat-icon>
-                  <span>Editar</span>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon>delete</mat-icon>
-                  <span>Eliminar</span>
-                </button>
-              </mat-menu>
+             
+              
             </div>
           </td>
         </ng-container>
