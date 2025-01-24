@@ -14,23 +14,7 @@
   <!-- Contenedor para notificaciones e icono de perfil -->
   <div class="d-flex align-items-center">
     <!-- Notificaciones -->
-    <button
-      mat-icon-button
-      aria-label="Notifications"
-      [matMenuTriggerFor]="notificationMenu"
-      matBadge="1"
-      matBadgeColor="primary"
-      matTooltip="Notificaciones"
-    >
-      <i-tabler class="d-flex" name="bell"></i-tabler>
-    </button>
-
-    <!-- Menú desplegable para notificaciones -->
-    <mat-menu #notificationMenu="matMenu" xPosition="before" yPosition="below">
-      <button mat-menu-item>Notificación 1</button>
-      <button mat-menu-item>Notificación 2</button>
-      <button mat-menu-item>Notificación 3</button>
-    </mat-menu>
+    
 
     <!-- Icono de perfil -->
     <button
@@ -49,24 +33,7 @@
       />
     </button>
     <mat-menu #profilemenu="matMenu" class="cardWithShadow">
-      <button mat-menu-item>
-        <mat-icon class="d-flex align-items-center"
-          ><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon
-        >My Profile
-      </button>
-      <button mat-menu-item>
-        <mat-icon class="d-flex align-items-center"
-          ><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon
-        >My Account
-      </button>
-      <button mat-menu-item>
-        <mat-icon class="d-flex align-items-center"
-          ><i-tabler
-            name="list-check"
-            class="icon-18 d-flex"
-          ></i-tabler></mat-icon
-        >My Task
-      </button>
+      
 
       <div class="p-x-12 m-t-12">
         <a

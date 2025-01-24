@@ -9,7 +9,7 @@ import { Proveedor } from './providers.models';
 
 
 export class ProvidersService {
-  private apiUrl = 'http://localhost:3000/proveedores';
+  private apiUrl = 'http://localhost:3500/proveedores';
 
   constructor(private http: HttpClient) {}
 
