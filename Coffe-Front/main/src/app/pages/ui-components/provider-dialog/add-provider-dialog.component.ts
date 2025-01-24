@@ -5,7 +5,7 @@ import { ProvidersService } from '../providers/providers-services.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 
 @Component({
   selector: 'app-add-provider-dialog',
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
     MatDialogModule,
     MatButtonModule,
     MatInputModule,
-    CommonModule,
+    CommonModule, // Asegúrate de incluir CommonModule
   ],
   template: `
     <h2 mat-dialog-title>Agregar Proveedor</h2>
@@ -24,16 +24,16 @@ import { CommonModule } from '@angular/common';
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>NIT</mat-label>
           <input matInput formControlName="nitProveedor" />
-          <mat-error *ngIf="providerForm.get('nitProveedor')?.invalid">
-            Este campo es requerido
+          <mat-error *ngIf="providerForm.get('nitProveedor')?.invalid && providerForm.get('nitProveedor')?.touched">
+            El NIT debe ser un número de 9 dígitos
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Nombre</mat-label>
           <input matInput formControlName="nombreProveedor" />
-          <mat-error *ngIf="providerForm.get('nombreProveedor')?.invalid">
-            Este campo es requerido
+          <mat-error *ngIf="providerForm.get('nombreProveedor')?.invalid && providerForm.get('nombreProveedor')?.touched">
+            El nombre es requerido y debe contener solo letras
           </mat-error>
         </mat-form-field>
 
@@ -45,16 +45,25 @@ import { CommonModule } from '@angular/common';
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Teléfono</mat-label>
           <input matInput formControlName="telefonoProveedor" />
+          <mat-error *ngIf="providerForm.get('telefonoProveedor')?.invalid && providerForm.get('telefonoProveedor')?.touched">
+            El teléfono debe tener entre 7 y 10 dígitos
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Banco</mat-label>
           <input matInput formControlName="nombreBanco" />
+          <mat-error *ngIf="providerForm.get('nombreBanco')?.invalid && providerForm.get('nombreBanco')?.touched">
+            El nombre del banco es requerido y debe contener solo letras
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Número de Cuenta</mat-label>
           <input matInput formControlName="numeroCuenta" />
+          <mat-error *ngIf="providerForm.get('numeroCuenta')?.invalid && providerForm.get('numeroCuenta')?.touched">
+            El número de cuenta debe tener 11 dígitos
+          </mat-error>
         </mat-form-field>
       </form>
     </mat-dialog-content>
@@ -80,19 +89,21 @@ export class AddProviderDialogComponent {
     private providersService: ProvidersService
   ) {
     this.providerForm = this.fb.group({
-      nitProveedor: ['', Validators.required],
-      nombreProveedor: ['', Validators.required],
-      direccionProveedor: [''],
-      telefonoProveedor: [''],
-      nombreBanco: [''],
-      numeroCuenta: [''],
-    });
+      nitProveedor: ['', [Validators.pattern('^[0-9]{9}$')]], // NIT opcional pero si se ingresa debe tener 9 dígitos
+      nombreProveedor: ['', [Validators.required, Validators.pattern('^[a-zA-Záéíóúñ ]+$')]], // Solo letras
+      direccionProveedor: [''], // Dirección opcional
+      telefonoProveedor: ['', [Validators.pattern('^[0-9]{7,10}$')]], // Teléfono opcional pero si se ingresa debe tener entre 7 y 10 dígitos
+      nombreBanco: ['', [Validators.required, Validators.pattern('^[a-zA-Záéíóúñ ]+$')]], // Solo letras
+      numeroCuenta: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]], // 11 dígitos
+         });
   }
 
   onSubmit(): void {
     if (this.providerForm.valid) {
-      const newProvider = this.providerForm.value;
-      this.providersService.createProvider(newProvider).subscribe({
+      const providerData = this.providerForm.value;
+
+      // Enviar la información del proveedor
+      this.providersService.createProvider(providerData).subscribe({
         next: () => {
           this.dialogRef.close(true); // Notifica que se agregó el proveedor
         },
@@ -101,5 +112,4 @@ export class AddProviderDialogComponent {
         },
       });
     }
-  }
-}
+  }}
