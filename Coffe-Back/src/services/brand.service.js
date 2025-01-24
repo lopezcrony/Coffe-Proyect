@@ -44,6 +44,7 @@ const createBrand = async (brandData, detalleMarcaData) => {
     }
 };
 
+
 const updateBrand = async (id, BrandData) => {
     try {
         if(!brandRepository.findBrandById(id)){
