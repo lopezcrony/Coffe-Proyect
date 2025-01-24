@@ -32,9 +32,10 @@ export class CreateBrandDialogComponent {
       nombreMarca: ['', Validators.required],
       imagenURL: ['', Validators.required],
       descripcionMarca: ['', Validators.required],
+      idProveedor: [null, Validators.required], // Campo para el ID del proveedor
     });
   }
-
+  
   closeDialog(): void {
     this.dialogRef.close();
   }

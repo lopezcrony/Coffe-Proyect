@@ -55,12 +55,13 @@
             [alt]="product.nombreMarca"
             class="product-image"
             matTooltip="Seleccionar marca"
+            (click)="redirectToProducts(product.idMarca)"
           />
           <mat-card-content class="product-content">
             <mat-card-title class="product-title text-center">
               {{ product.nombreMarca }}
             </mat-card-title>
-            <button mat-button color="primary" (click)="openBrandDialog(product)" class="w-100">
+            <button mat-button color="primary" (click)="openBrandDialog(product)" class="w-100" matTooltip="Ver detalles de la marca">
               Más información
             </button>
           </mat-card-content>

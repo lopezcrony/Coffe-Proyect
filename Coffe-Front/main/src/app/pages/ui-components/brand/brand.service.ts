@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Brand } from './brand.models';
+import { Brand, CreateBrandPayload } from './brand.models';
 
 @Injectable({
   providedIn: 'root',
@@ -11,19 +11,19 @@ export class BrandService {
 
   constructor(private http: HttpClient) {}
 
-  getAllProviders(): Observable<Brand[]> {
+  getAllBrands(): Observable<Brand[]> {
     return this.http.get<Brand[]>(this.apiUrl).pipe(
       catchError(this.handleError)
     );
   }
 
-  createProvider(Brand: Brand): Observable<Brand> {
-    return this.http.post<Brand>(this.apiUrl, Brand, { headers: this.getHeaders() }).pipe(
+  createBrand(payload: CreateBrandPayload): Observable<any> {
+    return this.http.post<any>(this.apiUrl, payload, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateProvider(Brand: Brand): Observable<Brand> {
+  updateBrand(Brand: Brand): Observable<Brand> {
     return this.http.put<Brand>(
       `${this.apiUrl}/${Brand.idMarca}`,
       Brand,
@@ -31,7 +31,7 @@ export class BrandService {
     ).pipe(catchError(this.handleError));
   }
 
-  updateStatusProvider(id: number, status: boolean): Observable<Brand> {
+  updateStatusBrand(id: number, status: boolean): Observable<Brand> {
     return this.http.patch<Brand>(
       `${this.apiUrl}/${id}`,
       { estadoBrand: status },
@@ -39,7 +39,7 @@ export class BrandService {
     ).pipe(catchError(this.handleError));
   }
 
-  deleteProvider(id: number): Observable<void> {
+  deleteBrand(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() }).pipe(
       catchError(this.handleError)
     );

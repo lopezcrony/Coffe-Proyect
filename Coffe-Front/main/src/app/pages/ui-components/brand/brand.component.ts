@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AppDialogContentComponent } from '../brand-dialog/brand-details-dialog.component';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -49,14 +48,14 @@ export class BrandComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private dialog: MatDialog, private brandService: BrandService) {}
+  constructor(private dialog: MatDialog, private brandService: BrandService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadBrands();
   }
 
   private loadBrands(): void {
-    this.brandService.getAllProviders().subscribe(
+    this.brandService.getAllBrands().subscribe(
       (response: Brand[]) => {
         this.products = response;
         this.filteredProducts = [...this.products]; // Inicializar lista filtrada con todos los productos
@@ -103,9 +102,21 @@ export class BrandComponent implements OnInit {
   }
 
   private createBrand(newBrand: Brand): void {
-    this.brandService.createProvider(newBrand).subscribe(
+    const payload = {
+      brandData: {
+        nombreMarca: newBrand.nombreMarca,
+        descripcionMarca: newBrand.descripcionMarca,
+        imagenURL: newBrand.imagenURL,
+      },
+      detalleMarcaData: {
+        idProveedor: 1, // Ajusta este valor dinámicamente si es necesario
+      },
+    };
+  
+    this.brandService.createBrand(payload).subscribe(
       (response) => {
-        this.products.push(response); // Agrega la nueva marca a la lista
+        console.log('Respuesta del servidor:', response);
+        this.products.push(response.newBrand); // Agrega la nueva marca a la lista
         this.applyFilter(new Event('input')); // Actualiza la lista filtrada
       },
       (error) => {
@@ -114,9 +125,6 @@ export class BrandComponent implements OnInit {
     );
   }
 
-  getRandomImage(): number {
-    return Math.floor(Math.random() * 8) + 4; // Genera un número aleatorio entre 4 y 11
-  }
 
   openBrandDialog(product: Brand): void {
     this.dialog.open(AppDialogContentComponent, {
@@ -125,5 +133,10 @@ export class BrandComponent implements OnInit {
         descripcionMarca: product.descripcionMarca,
       },
     });
+  }
+
+  redirectToProducts(idMarca: number): void {
+    console.log('Redirigiendo a Productos con idMarca:', idMarca);
+    this.router.navigate(['/Productos/', idMarca]);
   }
 }
