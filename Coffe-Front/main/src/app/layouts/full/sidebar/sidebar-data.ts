@@ -23,9 +23,6 @@ export const navItems: NavItem[] = [
     route: '/ui-components/Vitrina',
   },
   {
-    navCap: 'Ventas',
-  },
-  {
     displayName: 'Compras',
     iconName: 'archive',
     route: '/ui-components/Compras',

@@ -24,6 +24,10 @@ export const UiComponentsRoutes: Routes = [
         component: BrandComponent,
       },
       {
+        path: 'Compras',
+        component: BrandComponent,
+      },
+      {
         path: 'badge',
         component: AppBadgeComponent,
       },
