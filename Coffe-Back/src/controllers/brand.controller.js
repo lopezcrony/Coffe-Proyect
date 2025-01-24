@@ -20,11 +20,11 @@ const getOneBrand = async (req, res) => {
 
 const createBrand = async (req, res) => {
     try {
-        const newBrand = await brandService.createBrand(req.body);
-        res.status(201).json({ message: 'Marca agregada exitosamente.', newBrand });
-
+        const { brandData, detalleMarcaData } = req.body;
+        const result = await brandService.createBrand(brandData, detalleMarcaData);
+        res.status(201).json({ message: 'Marca y detalle creados exitosamente.', ...result });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al crear la marca y el detalle.', error: error.message });
     }
 };
 
