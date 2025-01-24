@@ -3,14 +3,8 @@ const moment = require('moment');
 
 const validateShopping = [
     // Validar campos dentro de 'shopping'
-    body('fechaCompra')
-        .notEmpty().withMessage('La fecha de compra es obligatoria')
-        .custom(value => {
-            if (!moment(value, 'YYYY-MM-DD', true).isValid()) {
-                throw new Error('La fecha de compra debe ser válida y en formato YYYY-MM-DD');
-            }
-            return true;
-        }),
+    body('shopping.idProveedor')
+        .notEmpty().withMessage('El id del proveedor es obligatorio'),
 
     // Validar el array 'shoppingDetail'
     body('shoppingDetail')
